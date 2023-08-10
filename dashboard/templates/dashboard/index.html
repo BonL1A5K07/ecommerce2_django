@@ -1,0 +1,33 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="mt-6 px-6 py-12 bg-black rounded-xl">
+    <h2 class="mb-12 text-2xl text-center text-pink-300">My items</h2>
+    <div class="grid grid-cols-3 gap-3">
+        {% for item in items %}
+        <div>
+            <!-- tạo app_name bên urls để app_name+name(trong urlpattern) = (appname)item:detail(name:của path) -->
+            <a href="{% url 'item:detail' item.id %}"><!--  linh hoạt, chuyên nghiệp, dự án lớn -->
+            <!--<a href="/items/{{item.id}}"> code như này thì không cần khai báo app_name bên urls nhưng nó thủ công -->
+                <div>
+                    <img src="{{ item.image.url }}" class="thumbnail">
+                </div>
+                <!-- <div>
+                    <img src="{{ item.image.url }}" class="rounded-t-xl">
+                </div> -->
+
+                <div class="p-6 bg-white rounded-b-xl">
+                    <h2 class="text-2xl">{{ item.title }}</h2>
+                    <p class="text-pink-500"> {{ item.name }}</p>
+                    <p class="text-black"> Price: {{ item.price }}</p>
+                    <p></p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
